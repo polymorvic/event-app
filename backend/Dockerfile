@@ -14,6 +14,6 @@ RUN pipenv install
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["pipenv", "run", "uvicorn", "fastapi:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+CMD ["pipenv", "run", "uvicorn", "src.api.routes:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
