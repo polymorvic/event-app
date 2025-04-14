@@ -1,4 +1,4 @@
-FROM python:3.14-alpine
+FROM python:3.12-alpine
 
 RUN apk add --no-cache --update --quiet dumb-init g++ musl-dev curl
 
