@@ -1,7 +1,28 @@
 services:
   backend:
+    depends_on:
+      - postgres
     build: ./backend
     container_name: event_app_backend
     ports:
-     - 8000:8000
-    
+      - 8000:8000
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=event_app
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: event_app_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=event_app
+    volumes:
+      - /var/lib/postgresql/data
