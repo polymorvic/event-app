@@ -9,7 +9,11 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/event_app
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=event_app
 
   postgres:
     image: postgres:16-alpine
