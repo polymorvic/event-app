@@ -1,7 +1,10 @@
 version: '3'
 
 tasks:
-  backend-console:
+  backend:console:
     desc: Open backend console
     cmds:
       - docker compose exec backend sh
+  db:console:
+    desc: Open database console
+      - docker compose exec postgres psql event_app postgres
