@@ -1,7 +1,7 @@
 version: '3'
 
 tasks:
-  backend:console:
+  console:
     desc: Open backend console
     cmds:
       - docker compose exec backend sh
