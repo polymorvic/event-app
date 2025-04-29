@@ -1,15 +1,34 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.orm import sessionmaker, DeclarativeBase, Session
 
+from typing import Generator
 
-from src import config
+from src import config, secrets
 
 
 def database_url() -> str:
     return "postgresql://{user}:{password}@{host}:{port}/{database_name}".format(
-        host="a",
-        port="q",
-        database="a",
-        user="asd",
-        password="asd"
+        host=config.database_host(),
+        port=config.database_port(),
+        database=config.database_name(),
+        user=secrets.database_user(),
+        password=secrets.database_password()
     )
+    
+
+engine = create_engine(database_url())
+
+_session = sessionmaker(bind=engine)
+
+class BaseModel(DeclarativeBase):
+    def ___repr__(self) -> str:
+        return str(self)
+
+
+def db_session() -> Generator[Session, None, None]:
+    db_session = _session()
+    
+    try:
+        yield db_session
+    finally:
+        db_session.close()
