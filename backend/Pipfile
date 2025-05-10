@@ -6,8 +6,13 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+sqlalchemy = "*"
+alembic = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
+mypy = "*"
+ruff = "*"
 
 [requires]
 python_version = "3.12"
