@@ -7,4 +7,5 @@ tasks:
       - docker compose exec backend sh
   db:console:
     desc: Open database console
+    cmds:
       - docker compose exec postgres psql event_app postgres

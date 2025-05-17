@@ -1,5 +1,6 @@
 import os
 
+
 def _secret_value(variable_name: str) -> str:
     return os.environ[variable_name]
 
