@@ -1,6 +1,11 @@
 version: '3'
 
 tasks:
+  default:
+    desc: "Run all dev tools at once - formatter, linter"
+    cmds:
+      - task: format
+      - task: lint 
   format:
     desc: Run formatter
     cmds:
