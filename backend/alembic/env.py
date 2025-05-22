@@ -1,6 +1,7 @@
 from logging.config import fileConfig
 
-from src.db.connection import BaseModel, engine
+from src.db.connection import engine
+from src.db.connection import BaseModel
 
 from alembic import context
 

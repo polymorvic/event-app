@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+  format:
+    desc: Run formatter
+    cmds:
+      - ruff format
+  lint:
+    desc: Run linter
+    cmds:
+      - ruff check --fix

@@ -7,18 +7,21 @@ from src import config, secrets
 
 
 def database_url() -> str:
-    return "postgresql+psycopg://{user}:{password}@{host}:{port}/{database_name}".format(
-        host=config.database_host(),
-        port=config.database_port(),
-        database_name=config.database_name(),
-        user=secrets.database_user(),
-        password=secrets.database_password()
+    return (
+        "postgresql+psycopg://{user}:{password}@{host}:{port}/{database_name}".format(
+            host=config.database_host(),
+            port=config.database_port(),
+            database_name=config.database_name(),
+            user=secrets.database_user(),
+            password=secrets.database_password(),
+        )
     )
 
 
 engine = create_engine(database_url())
 
 _session = sessionmaker(bind=engine)
+
 
 class BaseModel(DeclarativeBase):
     def ___repr__(self) -> str:
@@ -27,7 +30,7 @@ class BaseModel(DeclarativeBase):
 
 def db_session() -> Generator[Session, None, None]:
     db_session = _session()
-    
+
     try:
         yield db_session
     finally:
