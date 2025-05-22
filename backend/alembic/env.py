@@ -2,7 +2,6 @@ from logging.config import fileConfig
 
 from src.db.connection import engine
 from src.db.connection import BaseModel
-from src.users.models import *
 
 from alembic import context
 
