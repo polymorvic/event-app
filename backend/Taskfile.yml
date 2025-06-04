@@ -19,3 +19,7 @@ tasks:
     desc: Run type check
     cmds:
       - mypy src --strict
+  migrate:
+    desc: Run database migrations
+    cmds:
+      - alembic upgrade head
