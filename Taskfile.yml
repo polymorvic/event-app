@@ -9,3 +9,7 @@ tasks:
     desc: Open database console
     cmds:
       - docker compose exec postgres psql event_app postgres
+  db:init:
+    desc: Initialize databse
+    cmds:
+      - docker compose run --rm backend task migrate

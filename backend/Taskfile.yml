@@ -1,6 +1,12 @@
 version: '3'
 
 tasks:
+  default:
+    desc: "Run all dev tools at once - formatter, linter"
+    cmds:
+      - task: format
+      - task: lint 
+      - task: typing
   format:
     desc: Run formatter
     cmds:
@@ -9,3 +15,11 @@ tasks:
     desc: Run linter
     cmds:
       - ruff check --fix
+  typing:
+    desc: Run type check
+    cmds:
+      - mypy src --strict
+  migrate:
+    desc: Run database migrations
+    cmds:
+      - alembic upgrade head

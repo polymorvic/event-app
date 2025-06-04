@@ -9,6 +9,7 @@ uvicorn = "*"
 sqlalchemy = "*"
 alembic = "*"
 psycopg = {extras = ["binary"], version = "*"}
+passlib = {extras = ["bcrypt"], version = "*"}
 
 [dev-packages]
 mypy = "*"
