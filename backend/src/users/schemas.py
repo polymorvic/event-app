@@ -6,14 +6,14 @@ import re
 
 class UserIn(BaseModel):
     email: str
-    first_id: str
+    first_name: str
     last_name: str
-    passwrod: str
-    is_admin: bool
+    password: str
+    is_admin: bool | None = False
 
     @field_validator("email")
     @classmethod
-    def validate_email(cls, value):
+    def validate_email(cls, value: str) -> str | ValueError:
         pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
         if not re.match(pattern, value):
             raise ValueError("Provided email is not valid")
@@ -23,8 +23,8 @@ class UserIn(BaseModel):
 class UserOut(BaseModel):
     id: int
     email: str
-    first_id: str
+    first_name: str
     last_name: str
-    passwrod: str
+    password: str
     is_admin: bool
     created_at: datetime
