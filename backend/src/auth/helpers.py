@@ -1,6 +1,5 @@
 from src.auth.repository import get_user_by_email
 from passlib.context import CryptContext
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from src.users.models import User
 from datetime import datetime, timedelta, timezone
@@ -9,6 +8,7 @@ from src import secrets
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 ALGORITHM = "HS256"
+
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
@@ -27,7 +27,9 @@ def authenticate_user(dbs: Session, email: str, password: str) -> User | None:
     return user
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(
+    data: dict[str, str | datetime], expires_delta: timedelta | None = None
+) -> str:
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
