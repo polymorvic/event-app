@@ -11,3 +11,7 @@ def database_user() -> str:
 
 def database_password() -> str:
     return _secret_value("DATABASE_PASSWORD")
+
+
+def get_secret_key() -> str:
+    return _secret_value("SECRET_KEY")
