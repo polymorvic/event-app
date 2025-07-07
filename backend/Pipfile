@@ -10,6 +10,8 @@ sqlalchemy = "*"
 alembic = "*"
 psycopg = {extras = ["binary"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
+pyjwt = "*"
+types-passlib = "*"
 
 [dev-packages]
 mypy = "*"

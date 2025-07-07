@@ -14,6 +14,7 @@ services:
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=postgres
       - DATABASE_NAME=event_app
+      - SECRET_KEY=d6b1ee320072fd457119611188b149b6bda53c08ae05ad89b7cac20dabae067b
 
   postgres:
     image: postgres:16-alpine
