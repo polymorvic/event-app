@@ -26,7 +26,7 @@ async def login_for_access_token(
     if not user.is_activated:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not activated, please check your email",
+            detail="User not activated, please verify your email",
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(

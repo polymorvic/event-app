@@ -12,6 +12,7 @@ psycopg = {extras = ["binary"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
 pyjwt = "*"
 types-passlib = "*"
+fastapi-mail = "*"
 
 [dev-packages]
 mypy = "*"
