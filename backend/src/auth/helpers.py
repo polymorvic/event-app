@@ -2,8 +2,10 @@ from src.auth.repository import get_user_by_email
 from sqlalchemy.orm import Session
 from src.users.models import User
 import bcrypt
+from sqlalchemy import select
 from datetime import datetime, timedelta, timezone
 import jwt
+from itsdangerous import URLSafeSerializer, BadSignature
 from src import secrets
 
 ALGORITHM = "HS256"
@@ -38,3 +40,24 @@ def create_access_token(
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, secrets.get_secret_key(), algorithm=ALGORITHM)
     return encoded_jwt
+
+
+def email_verification_serializer() -> URLSafeSerializer:
+    return URLSafeSerializer(secrets.get_secret_key())
+
+
+def generate_verification_token(user_id: int, user_email: str) -> URLSafeSerializer:
+    serializer = email_verification_serializer()
+    return serializer.dumps(f"{user_id}:{user_email}")
+
+
+def verify_email_token(token: str, dbs: Session) -> User | None:
+    serializer = email_verification_serializer()
+    try:
+        data = serializer.loads(token)
+        print(f"/n/n/n/n/{data} /n/n/n/n")
+        user_id, user_email = data.split(":")
+        user = dbs.execute(select(User).where(User.id == int(user_id), User.email == user_email)).scalar_one_or_none()
+        return user
+    except BadSignature:
+        return None

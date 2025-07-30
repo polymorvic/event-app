@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi import APIRouter
 from src.auth.schemas import Token, Oauth2EmailRequestForm
 from datetime import timedelta
-from src.auth.helpers import authenticate_user, create_access_token
+from src.auth.helpers import authenticate_user, create_access_token, verify_email_token
 from sqlalchemy.orm import Session
 from src.db.connection import db_session
 
@@ -33,3 +33,21 @@ async def login_for_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
+
+
+
+
+@auth_router.get('/verify-email/{token}')
+def activate_account(token: str, dbs: Session = Depends(db_session)):
+    user = verify_email_token(token, dbs)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid verification email or user not found",
+        )
+        
+    if user.is_activated:
+         return {'message': {"Account already activated"}}
+    user.is_activated = True
+    dbs.commit()
+    return {'message': f'Account for user {user.email} has been activated successfully.'}
