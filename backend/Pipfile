@@ -12,6 +12,7 @@ psycopg = {extras = ["binary"], version = "*"}
 pyjwt = "*"
 fastapi-mail = "*"
 bcrypt = "*"
+itsdangerous = "*"
 
 [dev-packages]
 mypy = "*"
