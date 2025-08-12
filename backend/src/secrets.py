@@ -15,3 +15,15 @@ def database_password() -> str:
 
 def get_secret_key() -> str:
     return _secret_value("SECRET_KEY")
+
+
+def email_password() -> str:
+    return _secret_value("EMAIL_PASSWORD")
+
+
+def email_from() -> str:
+    return _secret_value("EMAIL_FROM")
+
+
+def email_username() -> str:
+    return _secret_value("EMAIL_USERNAME")

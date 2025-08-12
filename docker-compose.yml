@@ -11,10 +11,15 @@ services:
     environment:
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=event_app
-      - SECRET_KEY=d6b1ee320072fd457119611188b149b6bda53c08ae05ad89b7cac20dabae067b
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - SECRET_KEY=${SECRET_KEY}
+    env_file:
+      - .env
 
   postgres:
     image: postgres:16-alpine
@@ -22,8 +27,10 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=event_app
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    env_file:
+      - .env
     volumes:
       - /var/lib/postgresql/data

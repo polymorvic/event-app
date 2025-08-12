@@ -9,9 +9,10 @@ uvicorn = "*"
 sqlalchemy = "*"
 alembic = "*"
 psycopg = {extras = ["binary"], version = "*"}
-passlib = {extras = ["bcrypt"], version = "*"}
 pyjwt = "*"
-types-passlib = "*"
+fastapi-mail = "*"
+bcrypt = "*"
+itsdangerous = "*"
 
 [dev-packages]
 mypy = "*"

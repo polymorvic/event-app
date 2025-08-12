@@ -16,3 +16,4 @@ class User(BaseModel):
     password: Mapped[str] = mapped_column(String)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    is_activated: Mapped[bool] = mapped_column(Boolean, default=False)

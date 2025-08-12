@@ -28,3 +28,4 @@ class UserOut(BaseModel):
     password: str
     is_admin: bool
     created_at: datetime
+    is_activated: bool = False
