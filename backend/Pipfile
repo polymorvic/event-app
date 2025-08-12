@@ -17,6 +17,9 @@ itsdangerous = "*"
 [dev-packages]
 mypy = "*"
 ruff = "*"
+pytest = "*"
+httpx = "*"
+pytest-asyncio = "*"
 
 [requires]
 python_version = "3.12"
