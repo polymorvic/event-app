@@ -29,9 +29,9 @@ class BaseModel(DeclarativeBase):
 
 
 def db_session() -> Generator[Session, None, None]:
-    db_session = _session()
+    with _session() as session:
+        try:
+            yield session
+        except Exception:
+            session.rollback()
 
-    try:
-        yield db_session
-    finally:
-        db_session.close()
