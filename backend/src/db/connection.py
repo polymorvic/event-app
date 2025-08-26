@@ -34,4 +34,3 @@ def db_session() -> Generator[Session, None, None]:
             yield session
         except Exception:
             session.rollback()
-

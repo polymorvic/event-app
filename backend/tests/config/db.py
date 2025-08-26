@@ -7,6 +7,7 @@ import pytest
 from contextlib import contextmanager
 from src import db
 
+
 def test_database_name():
     return database_name() + "_test"
 
@@ -22,12 +23,17 @@ def create_test_database():
         ),
         isolation_level="AUTOCOMMIT",
     )
-    
-    with engine.connect() as connection:
-        connection.execute(text("DROP DATABASE IF EXISTS {db_name}".format(db_name=test_database_name()))) 
-        connection.execute(text("CREATE DATABASE {db_name}".format(db_name=test_database_name()))) 
-    engine.dispose()
 
+    with engine.connect() as connection:
+        connection.execute(
+            text(
+                "DROP DATABASE IF EXISTS {db_name}".format(db_name=test_database_name())
+            )
+        )
+        connection.execute(
+            text("CREATE DATABASE {db_name}".format(db_name=test_database_name()))
+        )
+    engine.dispose()
 
 
 @pytest.fixture(scope="session")
@@ -38,10 +44,9 @@ def database_engine(create_test_database):
             password="postgres",
             host=config.database_host(),
             port=config.database_port(),
-            database=test_database_name()
+            database=test_database_name(),
         )
     )
-
 
 
 @pytest.fixture(scope="session")
@@ -50,28 +55,24 @@ def connection(database_engine):
         with connection.begin():
             BaseModel.metadata.create_all(connection)
             connection.execute(text("CREATE EXTENSION pg_trgm;"))
-    
+
         yield connection
-        
+
     connection.close()
-    
-    
+
+
 @pytest.fixture
 def db_session(connection, monkeypatch):
     transactoin = connection.begin()
     session_factory = sessionmaker(bind=connection)
-    
+
     @contextmanager
     def session_factory_context_manager():
         connection.begin_nested()
         yield session_factory()
-        
-    monkeypatch.setattr(
-        db.connection,
-        "_session",
-        session_factory_context_manager
-    )
-    
+
+    monkeypatch.setattr(db.connection, "_session", session_factory_context_manager)
+
     session = session_factory()
     yield session
     transactoin.rollback()

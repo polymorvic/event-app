@@ -35,9 +35,7 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 
-
-
-@auth_router.get('/verify-email/{token}')
+@auth_router.get("/verify-email/{token}")
 def activate_account(token: str, dbs: Session = Depends(db_session)):
     user = verify_email_token(token, dbs)
     if not user:
@@ -45,9 +43,11 @@ def activate_account(token: str, dbs: Session = Depends(db_session)):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid verification email or user not found",
         )
-        
+
     if user.is_activated:
-         return {'message': {"Account already activated"}}
+        return {"message": {"Account already activated"}}
     user.is_activated = True
     dbs.commit()
-    return {'message': f'Account for user {user.email} has been activated successfully.'}
+    return {
+        "message": f"Account for user {user.email} has been activated successfully."
+    }

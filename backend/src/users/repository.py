@@ -7,7 +7,6 @@ from src.users.schemas import UserIn
 from src.auth.helpers import get_password_hash
 
 
-
 def user_create(user_in: UserIn, dbs: Session) -> User:
     db_user = dbs.execute(
         select(User).where(User.email == user_in.email)

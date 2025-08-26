@@ -12,12 +12,14 @@ ALGORITHM = "HS256"
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+    return bcrypt.checkpw(
+        plain_password.encode("utf-8"), hashed_password.encode("utf-8")
+    )
 
 
 def get_password_hash(password):
     hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt(rounds=12))
-    return hashed_password.decode('utf-8')
+    return hashed_password.decode("utf-8")
 
 
 def authenticate_user(dbs: Session, email: str, password: str) -> User | None:
@@ -57,7 +59,9 @@ def verify_email_token(token: str, dbs: Session) -> User | None:
         data = serializer.loads(token)
         print(f"/n/n/n/n/{data} /n/n/n/n")
         user_id, user_email = data.split(":")
-        user = dbs.execute(select(User).where(User.id == int(user_id), User.email == user_email)).scalar_one_or_none()
+        user = dbs.execute(
+            select(User).where(User.id == int(user_id), User.email == user_email)
+        ).scalar_one_or_none()
         return user
     except BadSignature:
         return None
