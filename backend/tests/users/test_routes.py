@@ -10,9 +10,6 @@ client = TestClient(app)
 
 @patch("src.users.routes.send_verification_mail")
 def test_creating_user(send_verification_mail, db_session):
-    
-    send_verification_mail.return_value = None
-    
     assert db_session.query(User).count() == 0
 
     response = client.post(
