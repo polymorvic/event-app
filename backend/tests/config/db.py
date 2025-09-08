@@ -25,14 +25,8 @@ def create_test_database():
     )
 
     with engine.connect() as connection:
-        connection.execute(
-            text(
-                "DROP DATABASE IF EXISTS {db_name}".format(db_name=test_database_name())
-            )
-        )
-        connection.execute(
-            text("CREATE DATABASE {db_name}".format(db_name=test_database_name()))
-        )
+        connection.execute(text("DROP DATABASE IF EXISTS {db_name}".format(db_name=test_database_name())))
+        connection.execute(text("CREATE DATABASE {db_name}".format(db_name=test_database_name())))
     engine.dispose()
 
 

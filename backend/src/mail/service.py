@@ -1,4 +1,4 @@
-from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
+from fastapi_mail import FastMail, MessageSchema, MessageType
 from src.mail.connection import conf
 
 

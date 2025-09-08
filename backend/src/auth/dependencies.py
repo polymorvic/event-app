@@ -19,9 +19,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 90
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 
 
-async def authentication(
-    dbs: Session = Depends(db_session), token: str = Depends(oauth2_scheme)
-) -> User | None:
+async def authentication(dbs: Session = Depends(db_session), token: str = Depends(oauth2_scheme)) -> User | None:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

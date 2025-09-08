@@ -4,7 +4,7 @@ from src.secrets import email_password, email_username, email_from
 
 conf = ConnectionConfig(
     MAIL_USERNAME=email_username(),
-    MAIL_PASSWORD=email_password(),
+    MAIL_PASSWORD=email_password(),  # type: ignore
     MAIL_FROM=email_from(),
     MAIL_PORT=587,
     MAIL_SERVER="smtp.gmail.com",
