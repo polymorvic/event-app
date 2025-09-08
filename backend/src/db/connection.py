@@ -32,5 +32,7 @@ def db_session() -> Generator[Session, None, None]:
     with _session() as session:
         try:
             yield session
+            session.commit()
         except Exception:
             session.rollback()
+            raise
