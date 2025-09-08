@@ -1,4 +1,4 @@
-from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
+from fastapi_mail import FastMail, MessageSchema, MessageType
 from src.mail.connection import conf
 
 
@@ -12,15 +12,13 @@ async def send_verification_mail(receiver_email: str, verification_token: str) -
         </body>
     </html>
     """
-    
+
     message = MessageSchema(
         subject="Welcome to Event App",
         recipients=[receiver_email],
         body=html,
-        subtype=MessageType.html
+        subtype=MessageType.html,
     )
-    
+
     fm = FastMail(conf)
     await fm.send_message(message)
-    
-    

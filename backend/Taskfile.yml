@@ -4,6 +4,7 @@ tasks:
   default:
     desc: "Run all dev tools at once - formatter, linter"
     cmds:
+      - task: test
       - task: format
       - task: lint 
       - task: typing
@@ -23,3 +24,7 @@ tasks:
     desc: Run database migrations
     cmds:
       - alembic upgrade head
+  test:
+    desc: Run mypy tests
+    cmds:
+      - pytest {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}} tests/ {{end}}
