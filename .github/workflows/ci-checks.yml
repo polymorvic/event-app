@@ -1,13 +1,6 @@
 name: CI Pipline
 
-on:
-  pull-request:
-    branches:
-      - "**"
-  push:
-    branches:
-      - master
-
+on: [push]
 
 jobs:
   hello:
