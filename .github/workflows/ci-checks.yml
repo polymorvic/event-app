@@ -23,4 +23,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: run formatter
-        run: docker compsoe -f docker-compose.yml run --rm backend task format
+        run: docker compsoe run --rm backend task format
