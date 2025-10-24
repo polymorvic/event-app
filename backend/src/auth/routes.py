@@ -1,11 +1,11 @@
-from fastapi import Depends, HTTPException, status
-from fastapi import APIRouter
-from src.auth.schemas import Token, Oauth2EmailRequestForm
 from datetime import timedelta
-from src.auth.helpers import authenticate_user, create_access_token, verify_email_token
-from sqlalchemy.orm import Session
-from src.db.connection import db_session
 
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from src.auth.helpers import authenticate_user, create_access_token, verify_email_token
+from src.auth.schemas import Oauth2EmailRequestForm, Token
+from src.db.connection import db_session
 
 auth_router = APIRouter()
 

@@ -1,9 +1,10 @@
-from sqlalchemy.orm import Session
-from sqlalchemy import select
 from fastapi import HTTPException
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from src.auth.helpers import get_password_hash
 from src.users.models import User
 from src.users.schemas import UserIn
-from src.auth.helpers import get_password_hash
 
 
 def user_create(user_in: UserIn, dbs: Session) -> User:

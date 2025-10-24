@@ -1,15 +1,14 @@
-from src import secrets
-from src.auth.schemas import TokenData
-from src.auth.repository import get_user_by_email
-from src.db.connection import db_session
-from src.users.models import User
-
 import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy.orm import Session
 
+from src import secrets
+from src.auth.repository import get_user_by_email
+from src.auth.schemas import TokenData
+from src.db.connection import db_session
+from src.users.models import User
 
 secret_key = secrets.get_secret_key()
 ALGORITHM = "HS256"

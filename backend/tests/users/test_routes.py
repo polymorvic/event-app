@@ -1,10 +1,10 @@
-from fastapi.testclient import TestClient
-from src.api.routes import app
 from unittest.mock import patch
-from src.users.models import User
-from src.auth.helpers import generate_verification_token
-from src.auth.helpers import create_access_token
 
+from fastapi.testclient import TestClient
+
+from src.api.routes import app
+from src.auth.helpers import create_access_token, generate_verification_token
+from src.users.models import User
 
 client = TestClient(app)
 

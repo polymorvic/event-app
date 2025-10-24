@@ -1,12 +1,14 @@
-from src.auth.repository import get_user_by_email
-from sqlalchemy.orm import Session
-from src.users.models import User
-import bcrypt
-from sqlalchemy import select
 from datetime import datetime, timedelta, timezone
+
+import bcrypt
 import jwt
-from itsdangerous import URLSafeSerializer, BadSignature
+from itsdangerous import BadSignature, URLSafeSerializer
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
 from src import secrets
+from src.auth.repository import get_user_by_email
+from src.users.models import User
 
 ALGORITHM = "HS256"
 

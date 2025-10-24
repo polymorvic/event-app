@@ -1,4 +1,5 @@
 import pytest
+
 from src.users.models import User
 
 

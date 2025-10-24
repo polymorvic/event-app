@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
 from src.auth.dependencies import authentication
 from src.auth.helpers import generate_verification_token
-from src.users.models import User
-from src.users.schemas import UserIn, UserOut
 from src.db.connection import db_session
-from sqlalchemy.orm import Session
-from src.users.repository import user_create
 from src.mail.service import send_verification_mail
-
+from src.users.models import User
+from src.users.repository import user_create
+from src.users.schemas import UserIn, UserOut
 
 users_router = APIRouter()
 
