@@ -1,6 +1,6 @@
 from fastapi_mail import ConnectionConfig
-from src.secrets import email_password, email_username, email_from
 
+from src.secrets import email_from, email_password, email_username
 
 conf = ConnectionConfig(
     MAIL_USERNAME=email_username(),

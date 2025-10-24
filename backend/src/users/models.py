@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from src.db.connection import BaseModel
-from sqlalchemy import BigInteger, DateTime, String, Boolean
+from sqlalchemy import BigInteger, Boolean, DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql import func
+
+from src.db.connection import BaseModel
 
 
 class User(BaseModel):

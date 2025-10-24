@@ -1,4 +1,5 @@
 import pytest
+
 from src.api.routes import app
 from src.auth.dependencies import authentication
 

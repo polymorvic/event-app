@@ -1,6 +1,7 @@
-from src.users.models import User
-from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from src.users.models import User
 
 
 def get_user_by_email(dbs: Session, email: str) -> User | None:

@@ -1,11 +1,12 @@
+from contextlib import contextmanager
+
+import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+
+from src import config, db, secrets
 from src.config import database_name
 from src.db.connection import BaseModel
-from src import config, secrets
-import pytest
-from contextlib import contextmanager
-from src import db
 
 
 def test_database_name():
