@@ -1,0 +1,21 @@
+name: CI Pipline
+
+on:
+  pull-request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - master
+
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v4
+
+      - name: prints hello
+        run: echo "Hello world"
