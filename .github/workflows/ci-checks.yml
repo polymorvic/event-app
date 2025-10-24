@@ -13,3 +13,14 @@ jobs:
 
       - name: Build docker
         run: docker compose build
+
+  checks:
+    name: CI checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: run formatter
+        run: docker compsoe -f docker-compose.yml run --rm backend task format
